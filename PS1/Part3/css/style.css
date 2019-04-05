@@ -1,0 +1,146 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    width: 80%;
+    padding: 5px 10% 5px 10%;
+    justify-content: space-between;
+}
+
+.logo h1 {
+    font-size: 50px;
+    margin: 0;
+    color: #1abc9c;
+}
+
+.logo h1:first-letter {
+    color: black;
+}
+
+.menu {
+    width: 50%;
+    text-transform: uppercase;
+}
+
+.menu ul {
+    text-align: right;
+}
+
+.menu li {
+    margin: 0 5% 0 5%;
+    list-style: none;
+    float: right;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #6a6971;
+}
+
+section {
+    display: flex;
+    padding: 70px 10% 70px 10%;
+    background-color: #16a085;
+    width: 80%;
+    color: white;
+}
+
+section:nth-child(odd) {
+    color: black;
+    background-color: white;
+}
+
+.apple {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.apple img {
+    width: 400px;
+}
+
+.description {
+    margin-top: 5%;
+}
+
+.description h2 {
+    font-size: 30px;
+    margin: 0;
+}
+
+.description p {
+    font-size: 20px;
+    padding: 50px 0 50px 0;
+}
+
+.button {
+    border: 2px solid white;
+    border-radius: 5px;
+    padding: 10px 20px 10px 20px;
+    font-size: 30px;
+    text-decoration: none;
+    color: white;
+}
+
+.skills {
+    display: flex;
+    text-align: center;
+}
+
+.icon {
+    margin: 0 auto;
+    background-color: #16a085;
+    padding: 30px;
+    font-size: 50px;
+    color: white;
+    border-radius: 130px;
+    width: 60px;
+}
+
+.item p{
+    color: #6a6971;
+}
+
+.contact {
+    display: block;
+    position: static;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.contact h2 {
+    text-align: center;
+    padding-bottom: 30px;
+    font-size: 30px;
+}
+
+.contact form {
+    width: 100%;
+}
+
+.contact form input, textarea {
+    font-size: 15px;
+    width: 100%;
+    height: 30px;
+    margin: 5px;
+    padding-left: 10px;
+}
+
+.contact form textarea {
+    height: 100px;
+}
+
+.contact form button {
+    font-size: 18px;
+    color: white;
+    text-align: center;
+    padding: 10px 40px 10px 40px;
+    background: none;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 30px 34%;
+    white-space: nowrap;
+}
