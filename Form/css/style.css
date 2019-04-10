@@ -1,5 +1,6 @@
 html, body{
     height: 100%;
+    overflow: hidden;
 }
 
 body{
@@ -57,7 +58,6 @@ section{
 .AboutMeForm__question{
     color: #d3bb89;
     font-size: 22px;
-    display: block;
 }
 
 .AboutMeForm__hint{
@@ -67,7 +67,7 @@ section{
     font-family: sans-serif, open;
 }
 
-.AboutMeForm_username{
+.AboutMeForm__text{
     padding-bottom: 10px;
     margin: 20px 0 20px 0;
     width: 100%;
@@ -103,7 +103,7 @@ section{
 }
 
 .AboutMeForm__aboutMyself {
-    margin: 20px 0 20px 0;
+    margin-top: 20px;
     width: 100%;
     background: none;
     border: none;
@@ -116,6 +116,7 @@ section{
 }
 
 .AboutMeForm__submitSave{
+    margin-top: 20px;
     width: 100%;
     height: 40px;
     border: none;
@@ -126,4 +127,36 @@ section{
 
 .AboutMeForm__submitSave{
     cursor: pointer;
+}
+
+.AboutMeForm__remember{
+    display: none;
+}
+
+.AboutMeForm__remember + label{
+    cursor: pointer;
+    padding-left: 20px;
+}
+
+.AboutMeForm__remember + label:before{
+    content: " ";
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-color: #d3bb89;
+    border: 2px solid #d3bb89;
+    vertical-align: middle;
+    margin-left: -10px;
+    margin-right: 10px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    transition: .2s;
+}
+
+.AboutMeForm__remember:checked + label:before{
+    font-size: 14px;
+    text-align: center;
+    content: "\2714";
+    color: #d3bb89;
+    background: none;
 }

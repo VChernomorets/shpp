@@ -22,12 +22,13 @@ main{
 	border: 1px solid black;
 	width: 70%;
 	min-width: 700px;
-    padding-bottom: 100px;
+    margin-bottom: 100px;
 }
 
 .right-content{
 	border: 1px solid black;
 	width: 30%;
+	margin-bottom: 100px;
 }
 
 .container{
