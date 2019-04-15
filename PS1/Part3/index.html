@@ -10,18 +10,17 @@
 <body>
 <header>
     <div class="logo"><h1>N++</h1></div>
-    <div class="menu">
+    <nav>
         <ul>
             <li><a href="#contact">Contact Us</a></li>
             <li><a href="#aboutUs">About Us</a></li>
             <li><a href="#product">Products</a></li>
         </ul>
-    </div>
+    </nav>
 </header>
-<section>
-    <a name="product"></a>
+<section id="product">
     <div class="apple">
-        <img src="images/Apple.png">
+        <img src="images/Apple.png" alt="IPhone">
     </div>
     <div class="description">
         <h2>Our awesome app is ready to use!</h2>
@@ -33,8 +32,7 @@
         </a>
     </div>
 </section>
-<section>
-    <a name="aboutUs"></a>
+<section id="aboutUs">
     <div class="skills">
         <div class="item">
             <div class="icon">
@@ -66,44 +64,49 @@
     </div>
 </section>
 <section>
-    <div class="contact">
-        <a name="contact"></a>
+    <div class="contact" id="contact">
         <h2>Contact us!</h2>
         <form>
-            <input type="text" alt="name" placeholder="Type here your name, please"><br>
-            <input type="email" alt="name" placeholder="Type here your email, please"><br>
-            <input type="tel" alt="name" placeholder="Type here your phone, please"><br>
+            <input type="text" alt="name" placeholder="Type here your name, please">
+            <input type="email" alt="name" placeholder="Type here your email, please">
+            <input type="tel" alt="name" placeholder="Type here your phone, please">
             <input type="password" name="pass" id="password" placeholder="Type here your password, please">
             <textarea placeholder="Ask your question"></textarea>
-            <label for="avatar">Avatar</label>
-            <input type="file" name="avatar" id="avatar"><br>
-            <input type="radio" name="sex" value="man">Man<br>
-            <input type="radio" name="sex" value="woman">Woman<br>
-            <input type="checkbox" name="rememberPassword" id="rememberPassword">
-            <label for="rememberPassword">Remember password?</label>
-            <input type="hidden" name="hidden"><br>
-            <label for="color">Color:</label>
-            <input type="color" name="color" id="color"><br>
-            <label for="date">Date:</label>
-            <input type="date" name="date" id="date"><br>
-            <label for="datetime">Date time</label>
-            <input type="datetime" name="datetime" id="datetime"><br>
-            <label for="datetime-local">Date time local</label>
-            <input type="datetime-local" name="datetime-local" id="datetime-local"><br>
-            <label for="number">number</label>
-            <input type="number" name="number" id="number"><br>
-            <label for="range">Range</label>
-            <input type="range" name="range" id="range"><br>
-            <label for="search">Search</label>
-            <input type="search" name="search" id="search"><br>
-            <label for="time">Time</label>
-            <input type="time" name="time" id="time"><br>
-            <label for="url">Url</label>
-            <input type="url" name="url" id="url"><br>
-            <label for="month">Month</label>
-            <input type="month" name="month" id="month"><br>
-            <label for="week">Week</label>
-            <input type="week" name="week" id="week"><br>
+            <div class="allInput">
+                <label for="avatar">Avatar</label>
+                <input type="file" name="avatar" id="avatar">
+                <div class="sex">
+                    <label for="sexMan">Man</label>
+                    <input type="radio" name="sex" id="sexMan">
+                    <label for="sexWoman">Woman</label>
+                    <input type="radio" name="sex" id="sexWoman">
+                </div>
+                <input type="hidden" name="hidden">
+                <label for="color">Color:</label>
+                <input type="color" name="color" id="color">
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date">
+                <label for="datetime">Date time</label>
+                <input type="datetime" name="datetime" id="datetime">
+                <label for="datetime-local">Date time local</label>
+                <input type="datetime-local" name="datetime-local" id="datetime-local">
+                <label for="number">number</label>
+                <input type="number" name="number" id="number">
+                <label for="range">Range</label>
+                <input type="range" name="range" id="range">
+                <label for="search">Search</label>
+                <input type="search" name="search" id="search">
+                <label for="time">Time</label>
+                <input type="time" name="time" id="time">
+                <label for="url">Url</label>
+                <input type="url" name="url" id="url">
+                <label for="month">Month</label>
+                <input type="month" name="month" id="month">
+                <label for="week">Week</label>
+                <input type="week" name="week" id="week">
+                <label for="rememberPassword">Remember password?</label>
+                <input type="checkbox" name="rememberPassword" id="rememberPassword">
+            </div>
             <div class="buttonForm">
                 <input type="reset" value="Reset">
                 <input type="submit" value="Send email!">

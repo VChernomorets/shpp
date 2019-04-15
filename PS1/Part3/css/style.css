@@ -1,6 +1,7 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: Helvetica;
 }
 
 header {
@@ -20,22 +21,22 @@ header {
     color: black;
 }
 
-.menu {
+nav {
     width: 80%;
     text-transform: uppercase;
 }
 
-.menu ul {
+nav ul {
     text-align: right;
 }
 
-.menu li {
+nav li {
     margin: 0 5% 0 5%;
     list-style: none;
     float: right;
 }
 
-.menu a {
+nav a {
     text-decoration: none;
     color: #6a6971;
 }
@@ -97,7 +98,7 @@ section:nth-child(odd) {
     padding: 30px;
     font-size: 50px;
     color: white;
-    border-radius: 130px;
+    border-radius: 50%;
     width: 60px;
 }
 
@@ -157,8 +158,14 @@ section:nth-child(odd) {
     color: white;
     width: 100%;
 }
-
-.allInput input {
-    margin: 20px;
+.allInput input{
     display: block;
+}
+.allInput label{
+    padding-right: 20px;
+    float: left;
+}
+
+.sex{
+    display: flex;
 }
