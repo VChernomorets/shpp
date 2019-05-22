@@ -1,0 +1,25 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+form input {
+    margin: 5px;
+}
+
+section {
+    padding: 50px;
+    border-bottom: 2px solid #6a6971;
+}
+
+.sumOfNumbers__result, .timeConversion__secondsResult, .timeConversion__hourResult, .timeInterval__result, .chessBoardView {
+    display: none;
+}
+
+.chessBoardView {
+    margin: 20px auto;
+}
+
+.urlAndIp__result li {
+    list-style-type: none;
+}
