@@ -13,7 +13,7 @@
             <input type="number" name="value1" id="sumOfNumbers__firstNumber" max="100" min="-100"><br>
             <label for="sumOfNumbers__secondNumber">Enter the number (from 100 to -100):</label>
             <input type="number" name="value2" id="sumOfNumbers__secondNumber" max="100" min="-100">
-            <input type="button" onclick="countNumbers()" value="Посчитать">
+            <input type="button" value="Посчитать" id="countNumbersClick">
         </form>
         <div class="sumOfNumbers__result">Result: <span class="sumOfNumbers__resultNumber"></span></div>
     </div>
@@ -23,11 +23,11 @@
         <form>
             <label for="timeConversion__seconds">Enter the time in seconds:</label>
             <input type="text" id="timeConversion__seconds">
-            <input type="button" onclick="convertSeconds()" value="Конвертировать"><br>
+            <input type="button" id="convertSeconds" value="Конвертировать"><br>
             <div class="timeConversion__secondsResult">Result: <span class="sumOfNumbers__resultNumber"></span></div>
             <label for="timeConversion__hour">Enter the time in the format hh:mm:ss :</label>
             <input type="text" value="00:00:00" id="timeConversion__hour">
-            <input type="button" onclick="convertHour()" value="Конвертировать">
+            <input type="button" id="convertHour" value="Конвертировать">
             <div class="timeConversion__hourResult">Result: <span class="sumOfNumbers__resultNumber"></span></div>
         </form>
     </div>
@@ -39,7 +39,7 @@
             <input type="datetime-local" name="firstDate" id="firstDate" value="1998-09-09T13:00"><br>
             <label for="secondDate">Enter the second date:</label>
             <input type="datetime-local" name="secondDate" id="secondDate" value="2019-10-05T13:00">
-            <input type="button" onclick="calculateTimeInterval()" value="Calculate spacing">
+            <input type="button" id="calculateTimeInterval" value="Calculate spacing">
         </form>
         <div class="timeInterval__result"></div>
     </div>
@@ -49,7 +49,7 @@
         <form>
             <label for="cellNumber">Enter the dimensions of the chessboard in the format ('8x8'):</label>
             <input id="cellNumber" type="text" value="8x8">
-            <input type="button" onclick="drawChessBoard()" value="Draw chess board">
+            <input type="button" id="drawChessBoard" value="Draw chess board">
         </form>
         <div class="chessBoardView">
         </div>
@@ -58,7 +58,7 @@
 <section>
     <div class="urlAndIp">
         <form>
-            <label for="urlAndIp">Enter arl and Ip separated by commas: </label><br>
+            <label for="urlAndIp">Enter Url and Ip separated by commas: </label><br>
             <textarea name="urlAndIp" id="urlAndIp" cols="140" rows="10"></textarea>
         </form>
         <ul class="urlAndIp__result"></ul>
@@ -71,7 +71,7 @@
             <textarea name="message" id="highlight__message" cols="100" rows="10"></textarea><br>
             <label for="highlight__regexp">Enter expression:</label><br>
             <input id="highlight__regexp" type="text"><br>
-            <input type="button" onclick="highlightText()" value="Go...">
+            <input type="button" id="highlightText" value="Go...">
         </form>
         <p class="highlight__result"></p>
     </div>

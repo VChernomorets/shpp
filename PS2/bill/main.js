@@ -39,16 +39,36 @@ const GOODS = [
 ];
 
 // Flags for displaying a table.
-let sortByCategoryFlag = false;
-let sortByNameFlag = false;
+let sortByCategoryFlag = 0;
+let sortByNameFlag = 0;
 let filterType = "";
 
 // Parameter to search by column name
 let regex = new RegExp("");
 
 // After loading the page display the table.
-window.onload = () => {
-    displayTable(GOODS);
+window.onload = () => displayTable();
+
+/**
+ * Sort according to flags.
+ */
+sorting = () => {
+    switch (sortByCategoryFlag) {
+        case 1:
+            GOODS.sort(compareCategory);
+            break;
+        case -1:
+            GOODS.sort(compareCategory);
+            GOODS.reverse();
+    }
+    switch (sortByNameFlag) {
+        case 1:
+            GOODS.sort(compareName);
+            break;
+        case -1:
+            GOODS.sort(compareName);
+            GOODS.reverse();
+    }
 };
 
 /**
@@ -57,19 +77,19 @@ window.onload = () => {
 let body = document.getElementsByClassName("tableBody")[0];
 displayTable = () => {
     clearChild(body);
-    if (sortByCategoryFlag) {
-        GOODS.sort(compareCategory);
-    }
-    if (sortByNameFlag) {
-        GOODS.sort(compareName);
-    }
+    sorting();
     let total = 0;
     for (let i = 0; i < GOODS.length; i++) {
         if ((filterType === "" || filterType === GOODS[i].category) && regex.test(GOODS[i].name)) {
             let tr = document.createElement("tr");
-            tr.innerHTML = `<td>${GOODS[i].category}</td><td>${GOODS[i].name}</td><td>${GOODS[i].amount}</td><td>${GOODS[i].price}$</td>`;
+            let row = GOODS[i];
+            let rowResult = "";
+            for (let key in row) {
+                rowResult += `<td>${row[key]}</td>`;
+            }
+            tr.innerHTML = rowResult;
             body.appendChild(tr);
-            total += GOODS[i].price;
+            total += GOODS[i].price * GOODS[i].amount;
         }
     }
     let result = document.getElementById("totalResult");
@@ -81,8 +101,12 @@ let sortByCategory = document.getElementById("sortByCategory");
  * We remove the sort flag by name. Add a sorting flag by category. Display the table again.
  */
 sortByCategory.addEventListener('click', () => {
-    sortByNameFlag = false;
-    sortByCategoryFlag = true;
+    sortByNameFlag = 0;
+    if (sortByCategoryFlag !== -1) {
+        sortByCategoryFlag = -1;
+    } else {
+        sortByCategoryFlag = 1;
+    }
     displayTable();
 });
 
@@ -102,8 +126,12 @@ let sortByName = document.getElementById("sortByName");
  * Add a sort flag by name. We remove the sorting flag by category.
  */
 sortByName.addEventListener('click', () => {
-    sortByCategoryFlag = false;
-    sortByNameFlag = true;
+    sortByCategoryFlag = 0;
+    if (sortByNameFlag !== -1) {
+        sortByNameFlag = -1;
+    } else {
+        sortByNameFlag = 1;
+    }
     displayTable();
 });
 
@@ -119,11 +147,11 @@ compareName = (firstName, secondName) => {
 
 /**
  * Remove all child elements.
- * @param chessBoardView Parent.
+ * @param element Parent.
  */
-clearChild = (chessBoardView) => {
-    while (chessBoardView.firstChild) {
-        chessBoardView.removeChild(chessBoardView.firstChild);
+clearChild = (element) => {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
     }
 };
 // Filter selection field.
