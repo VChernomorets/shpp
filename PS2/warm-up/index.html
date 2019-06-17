@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>PS2</title>
@@ -15,7 +15,7 @@
             <input type="number" name="value2" id="sumOfNumbers__secondNumber" max="100" min="-100">
             <input type="button" value="Посчитать" id="countNumbersClick">
         </form>
-        <div class="sumOfNumbers__result">Result: <span class="sumOfNumbers__resultNumber"></span></div>
+        <output id="sumOfNumbers__result"></output>
     </div>
 </section>
 <section>
@@ -24,11 +24,11 @@
             <label for="timeConversion__seconds">Enter the time in seconds:</label>
             <input type="text" id="timeConversion__seconds">
             <input type="button" id="convertSeconds" value="Конвертировать"><br>
-            <div class="timeConversion__secondsResult">Result: <span class="sumOfNumbers__resultNumber"></span></div>
+            <output id="timeConversion__secondsResult"></output>
             <label for="timeConversion__hour">Enter the time in the format hh:mm:ss :</label>
             <input type="text" value="00:00:00" id="timeConversion__hour">
             <input type="button" id="convertHour" value="Конвертировать">
-            <div class="timeConversion__hourResult">Result: <span class="sumOfNumbers__resultNumber"></span></div>
+            <output id="timeConversion__hourResult"></output>
         </form>
     </div>
 </section>
@@ -41,7 +41,7 @@
             <input type="datetime-local" name="secondDate" id="secondDate" value="2019-10-05T13:00">
             <input type="button" id="calculateTimeInterval" value="Calculate spacing">
         </form>
-        <div class="timeInterval__result"></div>
+        <output id="timeInterval__result"></output>
     </div>
 </section>
 <section>
@@ -51,8 +51,7 @@
             <input id="cellNumber" type="text" value="8x8">
             <input type="button" id="drawChessBoard" value="Draw chess board">
         </form>
-        <div class="chessBoardView">
-        </div>
+        <output id="chessBoardView"></output>
     </div>
 </section>
 <section>
@@ -61,7 +60,7 @@
             <label for="urlAndIp">Enter Url and Ip separated by commas: </label><br>
             <textarea name="urlAndIp" id="urlAndIp" cols="140" rows="10"></textarea>
         </form>
-        <ul class="urlAndIp__result"></ul>
+        <ul id="urlAndIp__result"></ul>
     </div>
 </section>
 <section>
@@ -73,7 +72,7 @@
             <input id="highlight__regexp" type="text"><br>
             <input type="button" id="highlightText" value="Go...">
         </form>
-        <p class="highlight__result"></p>
+        <output id="highlight__result"></output>
     </div>
 </section>
 <script src="js/main.js"></script>

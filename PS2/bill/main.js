@@ -39,8 +39,9 @@ const GOODS = [
 ];
 
 // Flags for displaying a table.
-let sortByCategoryFlag = 0;
-let sortByNameFlag = 0;
+let sortByCategoryFlag = true;
+let sortByNameFlag = true;
+let compareBy = "";
 let filterType = "";
 
 // Parameter to search by column name
@@ -50,37 +51,14 @@ let regex = new RegExp("");
 window.onload = () => displayTable();
 
 /**
- * Sort according to flags.
- */
-sorting = () => {
-    switch (sortByCategoryFlag) {
-        case 1:
-            GOODS.sort(compareCategory);
-            break;
-        case -1:
-            GOODS.sort(compareCategory);
-            GOODS.reverse();
-    }
-    switch (sortByNameFlag) {
-        case 1:
-            GOODS.sort(compareName);
-            break;
-        case -1:
-            GOODS.sort(compareName);
-            GOODS.reverse();
-    }
-};
-
-/**
  * Display the table in accordance with the flags.
  */
-let body = document.getElementsByClassName("tableBody")[0];
+const body = document.getElementById("tableBody");
 displayTable = () => {
     clearChild(body);
-    sorting();
     let total = 0;
     for (let i = 0; i < GOODS.length; i++) {
-        if ((filterType === "" || filterType === GOODS[i].category) && regex.test(GOODS[i].name)) {
+        if ((!filterType || filterType === GOODS[i].category) && regex.test(GOODS[i].name.toLowerCase())) {
             let tr = document.createElement("tr");
             let row = GOODS[i];
             let rowResult = "";
@@ -92,70 +70,54 @@ displayTable = () => {
             total += GOODS[i].price * GOODS[i].amount;
         }
     }
-    let result = document.getElementById("totalResult");
+    const result = document.getElementById("totalResult");
     result.innerText = `${total}$`;
 };
 // Sort button by category.
-let sortByCategory = document.getElementById("sortByCategory");
+const sortByCategory = document.getElementById("sortByCategory");
 /**
  * We remove the sort flag by name. Add a sorting flag by category. Display the table again.
  */
 sortByCategory.addEventListener('click', () => {
-    sortByNameFlag = 0;
-    if (sortByCategoryFlag !== -1) {
-        sortByCategoryFlag = -1;
-    } else {
-        sortByCategoryFlag = 1;
+    compareBy = "category";
+    GOODS.sort(compare);
+    sortByCategoryFlag = !sortByCategoryFlag;
+    if(sortByCategoryFlag){
+        GOODS.reverse();
     }
     displayTable();
 });
 
-// Compare two items by category.
-compareCategory = (firstCategory, secondCategory) => {
-    if (firstCategory.category < secondCategory.category) {
-        return -1;
-    } else if (firstCategory.category > secondCategory.category) {
-        return 1;
-    }
-    return 0;
+// Compare two items.
+compare = (firstElement, secondElement) => {
+    return  firstElement[compareBy] < secondElement[compareBy] ? -1 : firstElement[compareBy] > secondElement[compareBy] ? 1 : 0;
 };
 
 // Sort button by name.
-let sortByName = document.getElementById("sortByName");
+const sortByName = document.getElementById("sortByName");
 /**
  * Add a sort flag by name. We remove the sorting flag by category.
  */
 sortByName.addEventListener('click', () => {
-    sortByCategoryFlag = 0;
-    if (sortByNameFlag !== -1) {
-        sortByNameFlag = -1;
-    } else {
-        sortByNameFlag = 1;
+    compareBy = "name";
+    GOODS.sort(compare);
+    sortByNameFlag = !sortByNameFlag;
+    if(sortByNameFlag){
+        GOODS.reverse();
     }
     displayTable();
 });
 
-// Comparison of two names.
-compareName = (firstName, secondName) => {
-    if (firstName.name < secondName.name) {
-        return -1;
-    } else if (firstName.name > secondName.name) {
-        return 1;
-    }
-    return 0;
-};
-
 /**
  * Remove all child elements.
- * @param element Parent.
+ * @param parent Parent element.
  */
-clearChild = (element) => {
-    while (element.firstChild) {
-        element.removeChild(element.firstChild);
-    }
+clearChild = (parent) => {
+    parent.innerHTML = '';
 };
+
 // Filter selection field.
-let select = document.getElementById("selectFilter");
+const select = document.getElementById("selectFilter");
 /**
  * If a filter is selected, changes the filter.
  * Prints a new table.
@@ -166,11 +128,11 @@ select.onchange = () => {
     displayTable();
 };
 // A field to enter a search query.
-let search = document.getElementById('search');
+const search = document.getElementById('search');
 /**
  * Changes the search flag. Displays a table.
  */
 search.addEventListener("input", () => {
-    regex = new RegExp(search.value);
+    regex = new RegExp(search.value.toLowerCase());
     displayTable();
 });

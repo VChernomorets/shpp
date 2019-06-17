@@ -3,10 +3,10 @@
  * We consider the sum of numbers in the interval.
  * Numbers end at 2, 3, 7. Print the result to the user.
  */
-let countNumbersClick = document.getElementById("countNumbersClick");
+const countNumbersClick = document.getElementById("countNumbersClick");
 countNumbersClick.addEventListener('click', () => {
-    let firstNumber = document.getElementById('sumOfNumbers__firstNumber');
-    let secondNumber = document.getElementById('sumOfNumbers__secondNumber');
+    const firstNumber = document.getElementById('sumOfNumbers__firstNumber');
+    const secondNumber = document.getElementById('sumOfNumbers__secondNumber');
     if (!isCorrectInput(firstNumber, secondNumber)) {
         return;
     }
@@ -17,7 +17,7 @@ countNumbersClick.addEventListener('click', () => {
     } else {
         result = calculateSumNumbersInInterval(secondNumber.value, firstNumber.value);
     }
-    let resultBlock = document.getElementsByClassName('sumOfNumbers__result')[0];
+    const resultBlock = document.getElementById('sumOfNumbers__result');
     printResult(resultBlock, result);
 });
 
@@ -30,7 +30,7 @@ countNumbersClick.addEventListener('click', () => {
  */
 calculateSumNumbersInInterval = (lessValue, moreValue) => {
     let result = 0;
-    let regex = RegExp('(2$)|(3$)|(7$)');
+    const regex = RegExp('(2$)|(3$)|(7$)');
     for (; lessValue <= moreValue; lessValue++) {
         if (regex.test(lessValue)) {
             result += Number(lessValue);
@@ -44,13 +44,15 @@ calculateSumNumbersInInterval = (lessValue, moreValue) => {
  * @param args An array of numbers to check.
  * @returns {boolean} If any of the numbers do not match - false;
  */
-isCorrectInput = (...args) => {
-    args.forEach((value) => {
-        if (value.value > 100 || value.value < -100 || value.value === '') {
-            value.classList.add("error");
+const isCorrectInput = (...args) => {
+    let minValue = -100;
+    let maxValue = 100;
+    args.forEach((element) => {
+        if (element.value > maxValue || element.value < minValue || !element.value) {
+            element.classList.add("error");
             return false;
         } else {
-            value.classList.remove("error");
+            element.classList.remove("error");
         }
     });
     return true;
@@ -74,40 +76,37 @@ let minutesInHour = 60;
 /**
  * Seconds translates into a time format. Displays the result.
  */
-convertSeconds = document.getElementById("convertSeconds");
+const convertSeconds = document.getElementById("convertSeconds");
 convertSeconds.addEventListener('click', () => {
-    let secondsInput = document.getElementById('timeConversion__seconds');
-    if (!checkRegex(RegExp('^[0-9]+$'), secondsInput.value)) {
+    const secondsInput = document.getElementById('timeConversion__seconds');
+    if (!checkRegex(RegExp('^\\d+$'), secondsInput.value)) {
         secondsInput.classList.add("error");
         return;
     }
     secondsInput.classList.remove("error");
     let seconds = secondsInput.value;
-    let s = (seconds % secondsInMinute);
-    let m = Math.floor(seconds / secondsInMinute % minutesInHour);
-    let h = Math.floor(seconds / secondsInMinute * minutesInHour );
-    let result = document.getElementsByClassName('timeConversion__secondsResult')[0];
-    s = addZero(s);
-    m = addZero(m);
-    h = addZero(h);
+    let s = addZero(seconds % secondsInMinute);
+    let m = addZero(Math.floor(seconds / secondsInMinute % minutesInHour));
+    let h = addZero(Math.floor(seconds / (secondsInMinute * minutesInHour)));
+    const result = document.getElementById('timeConversion__secondsResult');
     printResult(result, `${seconds} in format hh:mm:ss: ${h}:${m}:${s}`);
 });
 /**
  * With a temporary format translates into seconds.
  * Displays the result.
  */
-convertHour = document.getElementById('convertHour');
+const convertHour = document.getElementById('convertHour');
 convertHour.addEventListener('click', () => {
-    let time = document.getElementById('timeConversion__hour');
-    if (!checkRegex(RegExp('^[0-9]?[0-9]:[0-9]?[0-9]:[0-9]?[0-9]$'), time.value)) {
+    const time = document.getElementById('timeConversion__hour');
+    if (!checkRegex(RegExp('^\\d?\\d:\\d?\\d:\\d?\\d$'), time.value)) {
         time.classList.add("error");
         return;
     } else {
         time.classList.remove("error");
     }
     let hms = time.value.split(':');
-    let seconds = (parseInt(hms[0]) * 3600) + (parseInt(hms[1]) * 60) + parseInt(hms[2]);
-    let result = document.getElementsByClassName('timeConversion__hourResult')[0];
+    let seconds = (parseInt(hms[0]) * (secondsInMinute * secondsInMinute) + (parseInt(hms[1]) * secondsInMinute) + parseInt(hms[2]));
+    const result = document.getElementById('timeConversion__hourResult');
     printResult(result, `${time.value} in seconds: ${seconds}`);
 });
 // Checks the regular expression.
@@ -128,17 +127,19 @@ printResult = (result, message) => {
 /**
  * We consider the interval between two dates.
  */
-calculateTimeInterval = document.getElementById('calculateTimeInterval');
+const calculateTimeInterval = document.getElementById('calculateTimeInterval');
 calculateTimeInterval.addEventListener('click', () => {
     let firstDate = new Date(document.getElementById('firstDate').value);
     let secondDate = new Date(document.getElementById('secondDate').value);
-    let result = document.getElementsByClassName('timeInterval__result')[0];
+    let arrayFirstDate;
+    let arraySecondDate;
     if (firstDate.getTime() > secondDate.getTime()) {
-        printResult(result, "The first date can not be more than the second!");
-        return;
+        arrayFirstDate = createArrayDate(secondDate);
+        arraySecondDate = createArrayDate(firstDate);
+    } else {
+        arrayFirstDate = createArrayDate(firstDate);
+        arraySecondDate = createArrayDate(secondDate);
     }
-    let arrayFirstDate = createArrayDate(firstDate);
-    let arraySecondDate = createArrayDate(secondDate);
     let between = new Array(arrayFirstDate.length).fill(0);
     // [second, minute, hour, day, month, year]
     let maxValueInDate = [60, 60, 23, 30, 11, 0];
@@ -149,29 +150,28 @@ calculateTimeInterval.addEventListener('click', () => {
             between[i + 1]--;
         }
     }
-    let resultMessage = `Результат: ${between[5]} year(s), ${between[4]} month(s), ${between[3]} day(s), ${between[2]} hour(s), ${between[1]} minute(s), ${between[0]} second(s)`;
+    const resultMessage = `Результат: ${between[5]} year(s), ${between[4]} month(s), ${between[3]} day(s), ${between[2]} hour(s), ${between[1]} minute(s), ${between[0]} second(s)`;
+    const result = document.getElementById('timeInterval__result');
     printResult(result, resultMessage);
 });
 
 /**
  * Remove all child elements.
- * @param element Parent.
+ * @param parent Parent element.
  */
-clearChild = (element) => {
-    while (element.firstChild) {
-        element.removeChild(element.firstChild);
-    }
+clearChild = (parent) => {
+    parent.innerHTML = '';
 };
 
 /**
  * We draw a chessboard in the set parameters.
  */
-drawChessBoard = document.getElementById('drawChessBoard');
+const drawChessBoard = document.getElementById('drawChessBoard');
 drawChessBoard.addEventListener('click', () => {
-    let dimensionsInput = document.getElementById('cellNumber');
+    const dimensionsInput = document.getElementById('cellNumber');
     let dimensions = dimensionsInput.value.split('x');
     const boardSize = 500;
-    let chessBoardView = document.getElementsByClassName('chessBoardView')[0];
+    const chessBoardView = document.getElementById('chessBoardView');
     clearChild(chessBoardView);
     let squareSize = (boardSize / Number(dimensions[0]));
     chessBoardView.style.width = boardSize + "px";
@@ -200,9 +200,8 @@ drawChessBoard.addEventListener('click', () => {
 });
 
 //All normal URL addresses
-let allUrl = [];
-// All normal IP addresses
-let allIp = [];
+let allLink = [];
+
 
 /**
  * We process record similar to IP
@@ -210,12 +209,14 @@ let allIp = [];
  */
 processIp = (text) => {
     let values = text.split(".");
+    let maxValueInIp = 255;
+    let minValueInIp = 0;
     for (let i = 0; i < values.length; i++) {
-        if (values[i] < 0 || values[i] > 255) {
+        if (values[i] < minValueInIp || values[i] > maxValueInIp) {
             return;
         }
     }
-    allIp.push(text);
+    allLink.push(text);
 };
 
 /**
@@ -223,23 +224,19 @@ processIp = (text) => {
  * @param text URL-like record
  */
 processUrl = (text) => {
-    let regexSpace = new RegExp('\\s');
-    if (regexSpace.test(text)) {
-        return;
-    }
-    allUrl.push(text);
+    allLink.push(text);
 };
 
 /**
  * Displays all posts similar to URLs.
  * @param result Block to display the result
  */
-displayUrl = (result) => {
-    for (let i = 0; i < allUrl.length; i++) {
-        let li = document.createElement('li');
-        let a = document.createElement('a');
-        a.href = allUrl[i];
-        let text = allUrl[i].replace("http://", "");
+displayLink = (result) => {
+    for (let i = 0; i < allLink.length; i++) {
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = allLink[i];
+        let text = allLink[i].replace("http://", "");
         text = text.replace("https://", "");
         a.innerText = text;
         a.target = "_blank";
@@ -248,17 +245,6 @@ displayUrl = (result) => {
     }
 };
 
-/**
- * Displays all entries similar to IP.
- * @param result Block to display the result
- */
-displayIp = (result) => {
-    for (let i = 0; i < allIp.length; i++) {
-        let li = document.createElement('li');
-        li.innerText = allIp[i];
-        result.appendChild(li);
-    }
-};
 
 /**
  * If the record is similar to IP calls the method for processing records similar to IP.
@@ -267,12 +253,12 @@ displayIp = (result) => {
  * @param elements array of records
  */
 filterItems = (elements) => {
-    let regexIp = new RegExp('^[0-9]+[.][0-9]+[.][0-9]+[.][0-9]+$');
-    let regexUrl = new RegExp('^((http|https):\/\/)|([a-z]+[.])[a-z]+[.][a-z]+');
+    const regexIp = new RegExp('\\d+\\.\\d+\\.\\d+\\.\\d+');
+    const regexUrl = new RegExp('(https:\/\/)?\\w+\\.\\w+');
+    console.log(elements);
     for (let i = 0; i < elements.length; i++) {
         if (regexIp.test(elements[i])) {
             processIp(elements[i]);
-
         } else if (regexUrl.test(elements[i])) {
             processUrl(elements[i]);
         }
@@ -282,27 +268,24 @@ filterItems = (elements) => {
 /**
  * Checks the entry, splits it by commas. Sorts the fields, displays the result.
  */
-let urlAndIp = document.getElementById('urlAndIp');
+const urlAndIp = document.getElementById('urlAndIp');
 urlAndIp.addEventListener('blur', (e) => {
-    allUrl = [];
-    allIp = [];
-    let text = e.target.value;
-    let elements = text.split(',');
+    allLink = [];
+    const text = e.target.value;
+    const elements = text.split(',');
     filterItems(elements);
-    let result = document.getElementsByClassName("urlAndIp__result")[0];
+    const result = document.getElementById("urlAndIp__result");
     clearChild(result);
-    allIp.sort();
-    allUrl.sort();
-    displayIp(result);
-    displayUrl(result);
+    allLink.sort();
+    displayLink(result);
 });
 
 /**
  * Regular expression selects all matches.
  */
-highlightText = document.getElementById('highlightText');
+const highlightText = document.getElementById('highlightText');
 highlightText.addEventListener('click', () => {
-    let text = document.getElementById('highlight__message').value;
-    let regexp = new RegExp(document.getElementById("highlight__regexp").value, "g");
-    document.getElementsByClassName("highlight__result")[0].innerHTML = text.replace(regexp, "<mark>$&</mark>");
+    const text = document.getElementById('highlight__message').value;
+    const regexp = new RegExp(document.getElementById("highlight__regexp").value, "g");
+    document.getElementById("highlight__result").innerHTML = text.replace(regexp, "<mark>$&</mark>");
 });
