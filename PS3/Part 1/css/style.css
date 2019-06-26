@@ -1,0 +1,48 @@
+.select {
+    cursor: pointer;
+    border: 1px solid silver;
+    width: 300px;
+    border-radius: 10px;
+}
+
+.selected__default {
+    font-size: 18px;
+    color: silver;
+    display: inline-block;
+}
+
+.pointer {
+    float: right;
+    margin-right: 15px;
+}
+
+.selected {
+    padding: 15px;
+}
+
+.select__options {
+    display: none;
+}
+
+.select__option {
+    font-size: 20px;
+    border-top: 1px solid #FAFAFA;
+    border-bottom: 1px solid #FAFAFA;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.select__option:hover {
+    background-color: #F3F3F3;
+    overflow: hidden;
+}
+
+.select__avatar {
+    margin-right: 10px;
+    float: left;
+    color: black;
+}
+
+.select__userName {
+    color: black;
+}
