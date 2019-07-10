@@ -29,12 +29,18 @@
     border-top: 1px solid #FAFAFA;
     border-bottom: 1px solid #FAFAFA;
     padding: 15px;
-    overflow: hidden;
 }
 
 .select__option:hover {
     background-color: #F3F3F3;
-    overflow: hidden;
+}
+
+.select__option:last-child {
+    margin-bottom: 7px;
+}
+
+.select__option-selected {
+    background-color: #F3F3F3;
 }
 
 .select__avatar {

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const $btnTop = $("#goToTop");
+    const $btnTop = $('#goToTop');
 
     // show up arrow if man skipped down
     $(window).scroll(function () {
@@ -14,8 +14,8 @@ $(document).ready(function () {
 
     // we process click on the menu and we scroll to the certain block
     $('nav a').click(function () {
-       const target = $(this).attr("href");
-       let offset = $(window).innerHeight() > $(target).innerHeight() ? $(target).offset().top - ($(window).innerHeight() - $(target).innerHeight())/2 : $(target).offset().top;
+       const target = $(this).attr('href');
+       const offset = $(window).innerHeight() > $(target).innerHeight() ? $(target).offset().top - ($(window).innerHeight() - $(target).innerHeight())/2 : $(target).offset().top;
        $('html, body').animate({scrollTop:offset},500);
         return false;
     });
