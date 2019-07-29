@@ -1,0 +1,101 @@
+.error{
+    color: red;
+}
+
+.task {
+    margin: 15px auto 20px;
+    box-shadow: 0 0 5px;
+    width: 50%;
+}
+
+.task__body {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.task__name {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: 'PT Serif', serif;
+    text-align: center;
+    color: #3875d7;
+    cursor: pointer;
+}
+
+.task__name:hover {
+    background-color: #f7f7f7;
+}
+
+.task__condition {
+    font-family: 'Muli', sans-serif;
+    border-bottom: 1px solid black;
+    margin-bottom: 25px;
+}
+
+.task__result {
+    padding-bottom: 15px;
+    margin-top: 15px;
+}
+
+.task__resultValue {
+    background-color: #3875d7;
+    padding: 5px;
+    border-radius: 20px;
+    color: white;
+}
+
+.task__upload {
+    background-color: #f7f7f7;
+    border: 1px dotted #3875d7;
+    padding: 5px;
+    width: fit-content;
+}
+
+.task__uploadForm {
+    width: fit-content;
+}
+
+input[type="submit"] {
+    background: white;
+    border: 1px solid #3875d7;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 20px 5px 20px;
+}
+
+input[type="submit"]:hover{
+    background-color: #cccccc;
+}
+
+.task__resultLinks ul {
+    list-style-type: none;
+}
+
+.task__resultLinks img {
+    width: 50px;
+}
+
+.chessBoard {
+    border: 1px dotted #3875d7;
+    width: fit-content;
+    margin: 15px auto;
+}
+
+.chessBoard__row {
+    display: block;
+    height: 50px;
+}
+
+.chessBoard__square-black {
+    background-color: black;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+.chessBoard__square-white {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    float: left;
+}

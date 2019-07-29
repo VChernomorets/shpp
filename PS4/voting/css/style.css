@@ -1,0 +1,45 @@
+.voting {
+    width: 500px;
+    padding: 15px;
+    background-color: #f7f7f7;
+    border: 1px dotted #3875d7;
+    margin: 15px auto;
+}
+
+.voting__item {
+    float: left;
+    width: 220px;
+    padding: 15px;
+}
+
+.voting__option {
+    background-color: white;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 220px;
+    margin: 15px;
+    padding: 15px;
+    float: left;
+    cursor: pointer;
+}
+
+.voting__option:hover {
+    box-shadow: 0 0 10px gold;
+}
+
+.voting__viewResults {
+    text-align: center;
+    width: 475px;
+}
+
+.voting__viewResults a {
+    text-decoration: none;
+}
+
+.error {
+    color: red;
+}
+
+.message {
+    color: green;
+}
