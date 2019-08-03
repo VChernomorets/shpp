@@ -1,0 +1,142 @@
+body {
+    background-color: #b9c783;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+header {
+    height: 1vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.line {
+    width: 50%;
+    background-image: linear-gradient(
+            to right,
+            #635960 0%, #635960 20%,
+            #8b8e59 20%, #8b8e59 40%,
+            #eada7d 40%, #eada7d 60%,
+            #fffecd 60%, #fffecd 80%,
+            #7bc3ab 80%, #7bc3ab 100%
+    );
+}
+
+.login {
+    width: 320px;
+    margin: 12vh auto 0 auto;
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;
+    color: #fffecd;
+    font-size: 73px;
+    font-weight: 100;
+    cursor: default;
+    text-align: center;
+}
+
+.login__form {
+    padding: 10px;
+}
+
+.login__input, .send__message {
+    width: 280px;
+    border: none;
+    background: #fffecd;
+    margin: 5px 0;
+    padding: 10px;
+    color: #635960;
+}
+
+.login__label {
+    color: #635960;
+    margin-top: 15px;
+    display: inline-block;
+}
+
+@-webkit-keyframes autofill {
+    to {
+        color: #635960;
+        background-color: #fffecd;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
+}
+
+.login__label:active, :hover, :focus {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.login__submit {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #635960;
+    border: none;
+    color: #fffecd;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.login__submit:hover {
+    opacity: 0.9;
+}
+
+.login__shadow {
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(185, 199, 131, 0) 100%);
+    width: 100%;
+    -moz-transform: translate(27px, 0px) skew(20deg, 0deg);
+    -webkit-transform: translate(27px, 0px) skew(20deg, 0deg);
+    -o-transform: translate(3627, 0px) skew(20deg, 0deg);
+    -ms-transform: translate(27px, 0px) skew(20deg, 0deg);
+    transform: translate(27px, 0px) skew(20deg, 0deg);
+}
+
+.chat {
+    width: 500px;
+    margin: 12vh auto 0 auto;
+}
+
+.chat__messagesBlock {
+    width: 100%;
+    height: 40vh;
+    background-color: #fffecd;
+    padding: 10px 0;
+}
+
+.send__message {
+    width: 339px;
+}
+
+.send__sendMessage {
+    background-color: #635960;
+    border: none;
+    color: #fffecd;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 30px;
+    padding: 10px 30px;
+}
+
+.send{
+    margin-top: 20px;
+}
+
+.message{
+    display: inline-block;
+    margin: 0 10px;
+    color: #635960;
+}
+
+.message__time::before{
+    content: "[";
+}
+
+.message__time::after{
+    content: "]";
+}
