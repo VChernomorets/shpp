@@ -3,19 +3,23 @@ include "config.php";
 
 class Accounts
 {
-
-    static function setHash($username, $hash){
-        foreach (self::getAccounts() as $item){
+    static function setHash($username){
+        $hash = self::generateCode();
+        $accounts = self::getAccounts();
+        foreach ($accounts as $item){
             if($item->username == $username){
                 $item->hash = $hash;
+                $_SESSION['hash'] = $hash;
+                self::write($accounts);
+                return true;
             }
         }
+        return false;
     }
 
     static function existHash($hash){
         foreach (self::getAccounts() as $item){
             if($item->hash == $hash){
-                echo "YEs!";
                 return true;
             }
         }
@@ -55,11 +59,8 @@ class Accounts
             self::write();
             return [];
         }
-        if(filesize(ACCOUNT_FILE) != 0) {
-            $file = fopen(ACCOUNT_FILE, 'r');
-            $date = json_decode(fread($file, filesize(ACCOUNT_FILE)));
-            fclose($file);
-            return $date;
+        if($test = file_get_contents(ACCOUNT_FILE)){
+            return json_decode($test);
         }
         return [];
     }
@@ -70,5 +71,16 @@ class Accounts
             fwrite($file, json_encode($date));
         }
         fclose($file);
+    }
+
+    private static function generateCode($length = 12)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";
+        $code = "";
+        $clen = strlen($chars) - 1;
+        while (strlen($code) < $length) {
+            $code .= $chars[mt_rand(0, $clen)];
+        }
+        return $code;
     }
 }

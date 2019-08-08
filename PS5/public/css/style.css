@@ -98,6 +98,7 @@ input:-webkit-autofill {
 }
 
 .chat {
+    display: none;
     width: 500px;
     margin: 12vh auto 0 auto;
 }
@@ -139,4 +140,12 @@ input:-webkit-autofill {
 
 .message__time::after{
     content: "]";
+}
+
+.error {
+    color: #F00000;
+}
+
+#wrongPasswordError, #usernameError, #passwordError{
+    display: none;
 }

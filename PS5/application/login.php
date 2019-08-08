@@ -1,10 +1,19 @@
 <?php
 require_once 'Accounts.php';
-$result = false;
-$username = $_POST['username'];
-$password = $_POST['password'];
-if(Accounts::existAccount($username)){
-    return Accounts::getPassword($username) == $password ? true : 'Пароль неверный!';
+
+function authorization($username, $password)
+{
+    if (Accounts::existAccount($username)) {
+        return Accounts::getPassword($username) == $password;
+    }
+    Accounts::createAccount($username, $password);
+    return true;
 }
-Accounts::createAccount($username, $password);
-return true;
+
+function createSession($username){
+    return Accounts::setHash($username);
+}
+
+function checkSession ($hash){
+    return Accounts::existHash($hash);
+}

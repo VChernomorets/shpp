@@ -1,3 +1,8 @@
+<?php
+session_start();
+print_r($_SESSION);
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,8 +13,8 @@
     <title>Easy Chat</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <header>
@@ -17,8 +22,7 @@
     <div class="line"></div>
 </header>
 <?php
-include '../application/views/login.php';
-include '../application/views/chat.php';
+include('../application/views/login.php');
 ?>
 <script type="text/javascript" src="js/main.js"></script>
 </body>
