@@ -108,6 +108,7 @@ input:-webkit-autofill {
     height: 40vh;
     background-color: #fffecd;
     padding: 10px 0;
+    overflow: auto;
 }
 
 .send__message {
@@ -129,9 +130,9 @@ input:-webkit-autofill {
 }
 
 .message{
-    display: inline-block;
     margin: 0 10px;
     color: #635960;
+    display: block;
 }
 
 .message__time::before{
@@ -146,6 +147,6 @@ input:-webkit-autofill {
     color: #F00000;
 }
 
-#wrongPasswordError, #usernameError, #passwordError{
+#wrongPasswordError, #usernameError, #passwordError, #emptyMessage{
     display: none;
 }

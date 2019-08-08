@@ -3,6 +3,15 @@ include "config.php";
 
 class Accounts
 {
+    static function getAccountByHash($hash){
+        foreach (self::getAccounts() as $account){
+            if($account->hash == $hash){
+                return $account;
+            }
+        }
+        return null;
+    }
+
     static function setHash($username){
         $hash = self::generateCode();
         $accounts = self::getAccounts();
