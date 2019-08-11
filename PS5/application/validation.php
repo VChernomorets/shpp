@@ -1,5 +1,6 @@
 <?php
 
+// processes authorization fields for validation.
 function validationLogin($username, $password){
     $errors = array();
     if(!preg_match('/^.{3,}$/', $username)){
@@ -11,6 +12,7 @@ function validationLogin($username, $password){
     return ['errors' => $errors];
 }
 
+// processes the field for sending a validation message.
 function validationSend($message){
     $errors = [];
     if($message == ""){

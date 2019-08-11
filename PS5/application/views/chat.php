@@ -1,16 +1,9 @@
 <div class="chat">
     <h1 class="logo">Easy Chat</h1>
     <div class="chat__messagesBlock">
-        <!--<p class="message">
-            <span class="message__time">15:47:15</span>
-            <b class="message__name">Nastya:</b>
-            <span class="message__text">Lorem ipsum dolor sit amet, consectetur adipiddf elit. Aut, ex?</span>
-        </p>
-        <p class="message">
-            <span class="message__time">15:47:15</span>
-            <b class="message__name">Nastya:</b>
-            <span class="message__text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, ex?</span>
-        </p>-->
+    </div>
+    <div class="welcome">
+        <p class="welcome__message">Welcome, Username!</p>
     </div>
     <form class="send" action="../application/handler.php" method="post">
         <div id="emptyMessage" class="error">Message must not be empty!</div>

@@ -1,5 +1,7 @@
 <?php
 session_start();
+
+// We process the registration page.
 if (($_POST['type'] ?? false) == 'login') {
     $type = $_POST['type'];
     include('validation.php');
@@ -20,10 +22,12 @@ if (($_POST['type'] ?? false) == 'login') {
     }
 }
 
+// Processing authorization check
 if (($_POST['type'] ?? false) == 'check') {
     printMessage('check', sessionExist());
 }
 
+// checks session for existence
 function sessionExist(){
     include 'login.php';
     $result = false;
@@ -33,6 +37,8 @@ function sessionExist(){
     return $result;
 }
 
+
+// message sending processing
 if(($_POST['type'] ?? false) == 'send'){
     if(!sessionExist()){
         printMessage('send', ['errors' => 'loginFailed']);
@@ -48,6 +54,8 @@ if(($_POST['type'] ?? false) == 'send'){
     printMessage('send', $message);
 }
 
+
+// Returns a list of messages
 if(($_POST['type'] ?? false) == 'getMessage'){
     if(!sessionExist()){
         printMessage('getMessage', ['errors' => 'loginFailed']);
@@ -57,6 +65,8 @@ if(($_POST['type'] ?? false) == 'getMessage'){
     printMessage('getMessage', $messages);
 }
 
+
+// Displays the result on the screen.
 function printMessage($type, $message)
 {
     echo json_encode([$type => $message]);

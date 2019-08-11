@@ -150,3 +150,7 @@ input:-webkit-autofill {
 #wrongPasswordError, #usernameError, #passwordError, #emptyMessage{
     display: none;
 }
+
+.welcome{
+    position: absolute;
+}
