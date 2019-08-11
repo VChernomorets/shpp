@@ -20,6 +20,7 @@ class Messages
             $date = json_decode($test);
             $newDate = [];
             foreach ($date as $item){
+                $date = date('h:i:s');
                 if($item->id >= $startID){
                     array_push($newDate, $item);
                 }

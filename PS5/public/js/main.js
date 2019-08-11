@@ -1,19 +1,26 @@
 $(document).ready(function () {
+    // if true - makes message requests
     let messagesFlag = false;
+    // if true - automatically scroll chat
     let scrollFag = false;
+    // Message Request Delay
     const MESSAGE_UPDATE_RATE = 1000;
+    // id of the last message, if -1, then the chat is empty.
     let lastMessageId = -1;
     checkSession();
 
+    // authorization check
     function checkSession() {
         query('type=check');
     }
 
+    // authorization form submission processing
     $('.login__form').submit(function (e) {
         e.preventDefault();
         query($(this).serialize());
     });
 
+    // makes requests to the server, transfers certain data.
     function query(date) {
         $.ajax({
             type: 'post',
@@ -26,6 +33,7 @@ $(document).ready(function () {
         });
     }
 
+    // processes the response from the server
     function handler(answer) {
         if (isset(answer['check'])) {
             if (answer['check']) {
@@ -68,8 +76,21 @@ $(document).ready(function () {
                 scrollChat($chat);
             }
         }
+        if(isset(answer['getUserName'])){
+            displayWelcome(answer['getUserName']['username']);
+        }
     }
 
+    // Displays a greeting
+    function displayWelcome(username) {
+        $('#welcome__username').text(username);
+        $('.welcome').fadeIn("normal");
+        setTimeout(function () {
+            $('.welcome').fadeOut("normal");
+        }, 1000);
+    }
+
+    // displays chat messages
     function displayMessages(messages) {
         messages.forEach(function (item) {
             lastMessageId = item['id'];
@@ -81,12 +102,14 @@ $(document).ready(function () {
         });
     }
 
+    // automatically scroll the chat to the end
     function scrollChat($chat) {
         if(scrollFag){
             $chat.scrollTop(Math.round($chat.prop('scrollHeight') - $chat.height()));
         }
     }
 
+    // changes text emoticons to graphic ones
     function replaceSmile(message) {
         let smile = [{
             'text': ':)',
@@ -101,6 +124,7 @@ $(document).ready(function () {
         return message;
     }
 
+    // handles all validation errors that come from the server.
     function displayErrors(answer) {
         let errors = ['wrongPasswordError', 'usernameError', 'passwordError', 'emptyMessage'];
         errors.forEach((element) => {
@@ -111,12 +135,15 @@ $(document).ready(function () {
         });
     }
 
+    // Shows chat
     function displayChat() {
+        getUserName();
         messagesFlag = true;
         displayForm('.chat', '.login');
         getMessages();
     }
 
+    // Requests a message from the server
     function getMessages() {
         let test = setInterval(function () {
             if (!messagesFlag) {
@@ -126,23 +153,32 @@ $(document).ready(function () {
         }, MESSAGE_UPDATE_RATE)
     }
 
+    // handles pushing a message
     $('.send').submit(function (e) {
         e.preventDefault();
         query($(this).serialize());
         $('#send__message').val('');
     });
 
+    // displays the authorization form on the screen
     function displayLogin() {
         messagesFlag = false;
         displayForm('.login', '.chat');
     }
 
+    // Cool method. Checks for the existence of a variable.
     function isset(variable) {
         return typeof (variable) != "undefined" && variable !== null;
     }
 
+    // It hides one form, the second. shows.
     function displayForm(show, hide) {
         $(hide).css('display', 'none');
         $(show).css('display', 'block');
+    }
+
+    // recognizes username by session
+    function getUserName() {
+        query('type=getUserName');
     }
 });

@@ -1,3 +1,6 @@
+<div class="welcome">
+    <div class="welcome__message">Welcome, <b id="welcome__username"></b>!</div>
+</div>
 <div class="chat">
     <h1 class="logo">Easy Chat</h1>
     <div class="chat__messagesBlock">

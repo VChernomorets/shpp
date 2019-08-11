@@ -13,3 +13,8 @@ function createMessage($message){
     $user = Accounts::getAccountByHash($_SESSION['hash'])->username;
     Messages::createMessage($message, $user, $date);
 }
+
+// returns username by session
+function getUsername(){
+    return Accounts::getAccountByHash($_SESSION['hash'])->username;
+}

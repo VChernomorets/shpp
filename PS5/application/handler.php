@@ -63,6 +63,11 @@ if(($_POST['type'] ?? false) == 'getMessage'){
     printMessage('getMessage', $messages);
 }
 
+// returns username by session
+if(($_POST['type'] ?? false) == 'getUserName'){
+    include 'chat.php';
+    printMessage('getUserName', ['username' => getUsername()]);
+}
 // query result output
 function printMessage($type, $message)
 {
