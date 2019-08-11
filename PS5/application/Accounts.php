@@ -1,7 +1,8 @@
 <?php
 include "config.php";
 
-// The class creates, writes, and returns user accounts.
+
+// Class for working with user accounts.
 class Accounts
 {
     // Returns an account by hash
@@ -14,7 +15,7 @@ class Accounts
         return null;
     }
 
-    // Assigned to user hash
+    // assigned to user hash
     static function setHash($username){
         $hash = self::generateCode();
         $accounts = self::getAccounts();
@@ -29,7 +30,7 @@ class Accounts
         return false;
     }
 
-    // Checks for the existence of a user with such a hash.
+    // Checks if the user hash
     static function existHash($hash){
         foreach (self::getAccounts() as $item){
             if($item->hash == $hash){
@@ -39,7 +40,7 @@ class Accounts
         return false;
     }
 
-    // Checks if an account exists. Verification by username.
+    // Searches for a user by username, if he is not, returns false if true.
     static function existAccount($username){
         if( self::getAccount($username) != null){
             return 1;
@@ -48,20 +49,20 @@ class Accounts
         }
     }
 
-    // Created account
+    // Create an account
     static function createAccount($username, $password){
         $date = self::getAccounts();
         array_push($date, ['username' => $username, 'password' => $password, 'hash' => ""]);
         self::write($date);
     }
 
-    // Returns user password
+    // returns user password
     static function getPassword($username){
         $account = self::getAccount($username);
         return $account->password;
     }
 
-    // Returns one account by username
+    // returns user account
     static function getAccount($username){
         foreach (self::getAccounts() as $account){
             if($account->username == $username){
@@ -71,7 +72,7 @@ class Accounts
         return null;
     }
 
-    // Returns a list of all accounts
+    // returns all accounts
     static function getAccounts(){
         if(!file_exists(ACCOUNT_FILE)){
             self::write();
@@ -83,7 +84,7 @@ class Accounts
         return [];
     }
 
-    // Writes users to a file.
+    // writes accounts to a file
     static function write($date = null){
         $file = fopen(ACCOUNT_FILE, 'w');
         if($date != null){
@@ -92,7 +93,8 @@ class Accounts
         fclose($file);
     }
 
-    // Generates hash code for the session
+
+    // generates hash code
     private static function generateCode($length = 12)
     {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPRQSTUVWXYZ0123456789";

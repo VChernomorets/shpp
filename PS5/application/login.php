@@ -1,7 +1,7 @@
 <?php
 require_once 'Accounts.php';
 
-// Handles authorization
+// user authorization processing
 function authorization($username, $password)
 {
     if (Accounts::existAccount($username)) {
@@ -11,12 +11,12 @@ function authorization($username, $password)
     return true;
 }
 
-// creates a session for the user
+// creating a session for the user
 function createSession($username){
     return Accounts::setHash($username);
 }
 
-// checks the session for existence.
+// user session verification
 function checkSession ($hash){
     return Accounts::existHash($hash);
 }

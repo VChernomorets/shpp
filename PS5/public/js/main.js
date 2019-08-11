@@ -1,25 +1,19 @@
 $(document).ready(function () {
-    // флаг для скролинга сообщений
     let messagesFlag = false;
-    // chat message refresh rate
+    let scrollFag = false;
     const MESSAGE_UPDATE_RATE = 1000;
-    // Last chat message. If -1, then there are no messages in the chat
     let lastMessageId = -1;
-    // user authorization check
     checkSession();
 
-    // Server request with session verification
     function checkSession() {
         query('type=check');
     }
 
-    // Processing submit form submission
     $('.login__form').submit(function (e) {
         e.preventDefault();
         query($(this).serialize());
     });
 
-    // makes a request to the server
     function query(date) {
         $.ajax({
             type: 'post',
@@ -32,7 +26,6 @@ $(document).ready(function () {
         });
     }
 
-    // processes all responses from the server
     function handler(answer) {
         if (isset(answer['check'])) {
             if (answer['check']) {
@@ -61,32 +54,53 @@ $(document).ready(function () {
                 $('#emptyMessage').css('display', 'none');
             }
         }
-        if(isset(answer['getMessage'])){
+        if (isset(answer['getMessage'])) {
             let message = answer['getMessage'];
-            if(isset(message['errors'])){
-                if(message['errors'] === "loginFailed"){
+            if (isset(message['errors'])) {
+                if (message['errors'] === "loginFailed") {
                     messagesFlag = false;
                     displayLogin();
                 }
             } else {
+                let $chat = $('.chat__messagesBlock');
+                scrollFag = $chat.prop('scrollHeight') === Math.round($chat.height() + $chat.scrollTop());
                 displayMessages(message);
+                scrollChat($chat);
             }
         }
     }
 
-    // chat message output
     function displayMessages(messages) {
         messages.forEach(function (item) {
             lastMessageId = item['id'];
             const date = $('<span>').addClass('message__time').text(item['date']);
             const username = $('<b>').addClass('message__name').text(item['username'] + ': ');
-            const message = $('<span>').addClass('message__text').text(item['messages']);
+            const message = $('<span>').addClass('message__text').text(replaceSmile(item['messages']));
             const wholeMessage = $('<p>').addClass('message').append(date, username, message);
             $('.chat__messagesBlock').append(wholeMessage);
         });
     }
 
-    // output of all errors
+    function scrollChat($chat) {
+        if(scrollFag){
+            $chat.scrollTop(Math.round($chat.prop('scrollHeight') - $chat.height()));
+        }
+    }
+
+    function replaceSmile(message) {
+        let smile = [{
+            'text': ':)',
+            'smile' : '😊'
+        }, {
+            'text': ':(',
+            'smile' : '😟'
+        }];
+        smile.forEach(function (item) {
+            message = message.replace(item['text'], item['smile']);
+        });
+        return message;
+    }
+
     function displayErrors(answer) {
         let errors = ['wrongPasswordError', 'usernameError', 'passwordError', 'emptyMessage'];
         errors.forEach((element) => {
@@ -97,41 +111,36 @@ $(document).ready(function () {
         });
     }
 
-    // displays chat
     function displayChat() {
         messagesFlag = true;
         displayForm('.chat', '.login');
         getMessages();
     }
 
-    // Makes a request to the site to receive messages
     function getMessages() {
         let test = setInterval(function () {
-            if(!messagesFlag){
+            if (!messagesFlag) {
                 clearInterval(test);
             }
             query('type=getMessage&id=' + lastMessageId);
         }, MESSAGE_UPDATE_RATE)
     }
 
-    // message sending processing
     $('.send').submit(function (e) {
         e.preventDefault();
         query($(this).serialize());
+        $('#send__message').val('');
     });
 
-    // Displays the registration form
     function displayLogin() {
         messagesFlag = false;
         displayForm('.login', '.chat');
     }
 
-    // insanely cool method. Checks for the existence of a variable
     function isset(variable) {
         return typeof (variable) != "undefined" && variable !== null;
     }
 
-    // displays one form, hides another
     function displayForm(show, hide) {
         $(hide).css('display', 'none');
         $(show).css('display', 'block');
