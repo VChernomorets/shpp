@@ -78,8 +78,8 @@ class Accounts
             self::write();
             return [];
         }
-        if($test = file_get_contents(ACCOUNT_FILE)){
-            return json_decode($test);
+        if($date = file_get_contents(ACCOUNT_FILE)){
+            return json_decode($date);
         }
         return [];
     }
