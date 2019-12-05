@@ -1,6 +1,4 @@
 <?php
-include "config.php";
-
 
 // Class for working with user accounts.
 class Accounts
@@ -74,11 +72,12 @@ class Accounts
 
     // returns all accounts
     static function getAccounts(){
-        if(!file_exists(ACCOUNT_FILE)){
+        $config =  include "config.php";
+        if(!file_exists($config['ACCOUNT_FILE'])){
             self::write();
             return [];
         }
-        if($date = file_get_contents(ACCOUNT_FILE)){
+        if($date = file_get_contents($config['ACCOUNT_FILE'])){
             return json_decode($date);
         }
         return [];
@@ -86,7 +85,8 @@ class Accounts
 
     // writes accounts to a file
     static function write($date = null){
-        $file = fopen(ACCOUNT_FILE, 'w');
+        $config =  include "config.php";
+        $file = fopen($config['ACCOUNT_FILE'], 'w');
         if($date != null){
             fwrite($file, json_encode($date));
         }

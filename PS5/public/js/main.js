@@ -24,11 +24,14 @@ $(document).ready(function () {
     function query(date) {
         $.ajax({
             type: 'post',
-            url: '../application/handler.php',
+            url: 'handler.php',
             data: date,
             dataType: 'json',
             success: function (answer) {
                 handler(answer);
+            },
+            error: function (answer) {
+                console.log(answer['responseText']);
             }
         });
     }

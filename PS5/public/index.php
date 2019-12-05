@@ -19,8 +19,8 @@
     <div class="line"></div>
 </header>
 <?php
-include '../application/views/login.php';
-include '../application/views/chat.php';
+include '../application/views/login.html';
+include '../application/views/chat.html';
 ?>
 <script type="text/javascript" src="js/main.js"></script>
 </body>

@@ -12,11 +12,12 @@ class Messages
 
     // returns messages starting with id
     static function getMessages($startID){
-        if(!file_exists(MESSAGES_FILE)){
+        $config =  include "config.php";
+        if(!file_exists($config['MESSAGES_FILE'])){
             self::write();
             return [];
         }
-        if($test = file_get_contents(MESSAGES_FILE)){
+        if($test = file_get_contents($config['MESSAGES_FILE'])){
             $date = json_decode($test);
             $newDate = [];
             foreach ($date as $item){
@@ -32,7 +33,8 @@ class Messages
 
     // writes messages to a file.
     static function write($date = null){
-        $file = fopen(MESSAGES_FILE, 'w');
+        $config =  include "config.php";
+        $file = fopen($config['MESSAGES_FILE'], 'w');
         if($date != null){
             fwrite($file, json_encode($date));
         }

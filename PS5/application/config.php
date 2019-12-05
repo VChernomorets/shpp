@@ -1,6 +1,6 @@
 <?php
-define('PATH', dirname(__FILE__));
-define('DATA_PATH', PATH . DIRECTORY_SEPARATOR . 'date' . DIRECTORY_SEPARATOR);
-define('ACCOUNT_FILE', DATA_PATH . 'accounts.json');
-define('MESSAGES_FILE', DATA_PATH . 'messages.json');
-
+$dataPath = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR;
+return [
+    'ACCOUNT_FILE' => $dataPath . 'accounts.json',
+    'MESSAGES_FILE' => $dataPath . 'messages.json'
+];
