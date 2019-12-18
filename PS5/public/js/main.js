@@ -21,11 +21,11 @@ $(document).ready(function () {
     });
 
     // makes requests to the server, transfers certain data.
-    function query(date) {
+    function query(data) {
         $.ajax({
             type: 'post',
             url: 'handler.php',
-            data: date,
+            data: data,
             dataType: 'json',
             success: function (answer) {
                 handler(answer);

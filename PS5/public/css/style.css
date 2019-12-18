@@ -1,6 +1,6 @@
 body {
     background-color: #b9c783;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 header {
@@ -111,7 +111,7 @@ input:-webkit-autofill {
 }
 
 .send__message {
-    width: 339px;
+    width: 330px;
 }
 
 .send__sendMessage {

@@ -6,7 +6,7 @@ class Accounts
     // Returns an account by hash
     static function getAccountByHash($hash){
         foreach (self::getAccounts() as $account){
-            if($account->hash == $hash){
+            if($account->hash === $hash){
                 return $account;
             }
         }
@@ -18,7 +18,7 @@ class Accounts
         $hash = self::generateCode();
         $accounts = self::getAccounts();
         foreach ($accounts as $item){
-            if($item->username == $username){
+            if($item->username === $username){
                 $item->hash = $hash;
                 $_SESSION['hash'] = $hash;
                 self::write($accounts);
@@ -40,11 +40,7 @@ class Accounts
 
     // Searches for a user by username, if he is not, returns false if true.
     static function existAccount($username){
-        if( self::getAccount($username) != null){
-            return 1;
-        } else {
-            return 0;
-        }
+        return self::getAccount($username) != null ? 1 : 0;
     }
 
     // Create an account
