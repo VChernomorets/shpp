@@ -9,7 +9,7 @@ class DB
      */
     function __construct()
     {
-        $config = require 'config.php';
+        $config = require 'config' . DIRECTORY_SEPARATOR . 'db.php';
         $this->dbh = new PDO('mysql:host='. $config['database']['host'] . ';dbname='. $config['database']['dbname'], $config['database']['user'], $config['database']['pass']);
     }
 

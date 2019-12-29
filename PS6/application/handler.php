@@ -74,3 +74,7 @@ function printMessage($type, $message)
     echo json_encode([$type => $message]);
     exit();
 }
+
+if(($_POST['type'] ?? false) == 'out'){
+    session_destroy();
+}

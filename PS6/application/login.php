@@ -5,7 +5,7 @@ require_once 'Accounts.php';
 function authorization($username, $password)
 {
     if (Accounts::existAccount($username)) {
-        return Accounts::getPassword($username) == $password;
+        return Accounts::getPassword($username) === md5($password);
     }
     Accounts::createAccount($username, $password);
     return true;

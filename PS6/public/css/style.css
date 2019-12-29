@@ -97,6 +97,16 @@ input:-webkit-autofill {
     transform: translate(27px, 0px) skew(20deg, 0deg);
 }
 
+.out{
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    border-bottom: 1px solid black;
+    padding: 5px 0 0 ;
+}
+
 .chat {
     display: none;
     width: 500px;

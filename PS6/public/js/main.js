@@ -185,4 +185,8 @@ $(document).ready(function () {
         query('type=getUserName');
     }
 
+    $('#out').on('click', () => {
+        query('type=out');
+        location.reload();
+    })
 });

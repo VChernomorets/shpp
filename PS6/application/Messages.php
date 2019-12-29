@@ -15,14 +15,4 @@ class Messages
         $messages = $db->select('SELECT * FROM messages WHERE id >= ?', [$startID]);
         return count($messages) != 0 ? $messages : [];
     }
-
-    // writes messages to a file.
-    static function write($date = null){
-        $config = require 'config.php';
-        $file = fopen($config['MESSAGES_FILE'], 'w');
-        if($date != null){
-            fwrite($file, json_encode($date));
-        }
-        fclose($file);
-    }
 }

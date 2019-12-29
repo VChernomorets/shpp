@@ -1,7 +1,5 @@
 <?php
-include "config.php";
 include './DB.php';
-
 
 // Class for working with user accounts.
 class Accounts
@@ -43,7 +41,7 @@ class Accounts
     // Create an account
     static function createAccount($username, $password){
         $db = new DB();
-        $db->insert('INSERT INTO users (id, username, pass, hash) VALUES (:id, :username, :pass, :hash)', [':id' => 'NULL', ':username' => $username, ':pass' => $password, ':hash' => '']);
+        $db->insert('INSERT INTO users (id, username, pass, hash) VALUES (:id, :username, :pass, :hash)', [':id' => 'NULL', ':username' => $username, ':pass' => md5($password), ':hash' => '']);
     }
 
     // returns user password
@@ -51,40 +49,6 @@ class Accounts
         $db = new DB();
         return $db->select('SELECT pass FROM `users` WHERE username = ?', [$username])[0]['pass'];
     }
-
-    // returns user account
-    static function getAccount($username){
-        foreach (self::getAccounts() as $account){
-            if($account->username == $username){
-                return $account;
-            }
-        }
-        return null;
-    }
-
-    // returns all accounts
-    static function getAccounts(){
-        $config = require 'config.php';
-        if(!file_exists($config['ACCOUNT_FILE'])){
-            self::write();
-            return [];
-        }
-        if($date = file_get_contents($config['ACCOUNT_FILE'])){
-            return json_decode($date);
-        }
-        return [];
-    }
-
-    // writes accounts to a file
-    static function write($date = null){
-        $config = require 'config.php';
-        $file = fopen($config['ACCOUNT_FILE'], 'w');
-        if($date != null){
-            fwrite($file, json_encode($date));
-        }
-        fclose($file);
-    }
-
 
     // generates hash code
     private static function generateCode($length = 12)
