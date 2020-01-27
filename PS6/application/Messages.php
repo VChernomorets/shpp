@@ -6,7 +6,7 @@ class Messages
     // create message from user
     static function createMessage($message, $username, $date){
         $db = new DB();
-        $db->insert('INSERT INTO messages (id, date, username, messages) VALUES (:id, :date, :username, :messages)', [':id' => 'NULL', ':date' => $date, ':username' => $username, ':messages' => $message]);
+        $db->insert('INSERT INTO messages (id, date, username, messages) VALUES (:id, :date, :username, :messages)', [':id' => NULL, ':date' => $date, ':username' => $username, ':messages' => $message]);
     }
 
     // returns messages starting with id

@@ -12,8 +12,10 @@ if (($_POST['type'] ?? false) == 'login') {
         printMessage($type, $errors);
     }
     include('login.php');
+
     if (authorization($username, $password)) {
         if (createSession($_POST['username'])) {
+
             printMessage($type, 'successful');
         }
     } else {
@@ -43,7 +45,7 @@ if(($_POST['type'] ?? false) == 'send'){
         printMessage('send', ['errors' => 'loginFailed']);
     }
     include 'validation.php';
-    $message = $_POST['message'] ?? '';
+    $message = trim($_POST['message']) ?? '';
     $errors = validationSend($message);
     if(count($errors['errors'])){
         printMessage('send', $errors);

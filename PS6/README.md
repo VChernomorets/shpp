@@ -7,7 +7,7 @@ hash char(255) not null
 
 create table messages(
 id int(10) unsigned auto_increment primary key,
-date char(255) not null,
+date int(10) not null,
 username char(255) not null,
 messages text not null
 );

@@ -41,7 +41,7 @@ class Accounts
     // Create an account
     static function createAccount($username, $password){
         $db = new DB();
-        $db->insert('INSERT INTO users (id, username, pass, hash) VALUES (:id, :username, :pass, :hash)', [':id' => 'NULL', ':username' => $username, ':pass' => md5($password), ':hash' => '']);
+        $db->insert('INSERT INTO users (id, username, pass, hash) VALUES (:id, :username, :pass, :hash)', [':id' => NULL, ':username' => $username, ':pass' => md5($password), ':hash' => '']);
     }
 
     // returns user password

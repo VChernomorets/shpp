@@ -15,7 +15,7 @@ function validationLogin($username, $password){
 // validation check message sending form
 function validationSend($message){
     $errors = [];
-    if($message == ""){
+    if($message === ""){
         array_push($errors, 'emptyMessage');
     }
     return ['errors' => $errors];

@@ -1,6 +1,7 @@
 <?php
 require_once 'Messages.php';
 require_once 'Accounts.php';
+date_default_timezone_set('Europe/Kiev');
 
 // returns a message starting with id
 function getMessages($startId = 0){
@@ -17,7 +18,6 @@ function getMessages($startId = 0){
 
 // creates a message.
 function createMessage($message){
-    //$date = date('h:i:s');
     $time = time();
     $user = Accounts::getAccountByHash($_SESSION['hash'])['username'];
     Messages::createMessage($message, $user, $time);

@@ -98,7 +98,7 @@ $(document).ready(function () {
         messages.forEach(function (item) {
             lastMessageId = item['id'];
             const date = $('<span>').addClass('message__time').text(item['date']);
-            const username = $('<b>').addClass('message__name').text(item['username'] + ': ');
+            const username = $('<b>').addClass('message__name').text(' ' + item['username'] + ': ');
             const message = $('<span>').addClass('message__text').text(replaceSmile(item['messages']));
             const wholeMessage = $('<p>').addClass('message').append(date, username, message);
             $('.chat__messagesBlock').append(wholeMessage);

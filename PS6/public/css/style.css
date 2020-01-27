@@ -36,7 +36,8 @@ header {
 }
 
 .login__form {
-    padding: 10px;
+    background-color: #b9c783;
+    width: 300px;
 }
 
 .login__input, .send__message {
@@ -72,7 +73,7 @@ input:-webkit-autofill {
 }
 
 .login__submit {
-    width: 100%;
+    width: 300px;
     height: 40px;
     margin-top: 20px;
     background-color: #635960;
@@ -80,6 +81,7 @@ input:-webkit-autofill {
     color: #fffecd;
     font-size: 20px;
     cursor: pointer;
+
 }
 
 .login__submit:hover {
@@ -88,13 +90,12 @@ input:-webkit-autofill {
 
 .login__shadow {
     height: 150px;
+    width: 300px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(185, 199, 131, 0) 100%);
-    width: 100%;
-    -moz-transform: translate(27px, 0px) skew(20deg, 0deg);
-    -webkit-transform: translate(27px, 0px) skew(20deg, 0deg);
-    -o-transform: translate(3627, 0px) skew(20deg, 0deg);
-    -ms-transform: translate(27px, 0px) skew(20deg, 0deg);
-    transform: translate(27px, 0px) skew(20deg, 0deg);
+    transform-origin: top left;
+    transform: rotate(-15deg);
+    position: absolute;
+    z-index: -999;
 }
 
 .out{
