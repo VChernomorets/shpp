@@ -22,11 +22,13 @@ if (($_POST['type'] ?? false) == 'login') {
         array_push($errors['errors'], 'wrongPasswordError');
         printMessage($type, $errors);
     }
+    return;
 }
 
 // processing user authorization checks
 if (($_POST['type'] ?? false) == 'check') {
     printMessage('check', sessionExist($app));
+    return;
 }
 
 // Check if a session exists
@@ -53,6 +55,7 @@ if(($_POST['type'] ?? false) == 'send'){
     include $app . 'chat.php';
     createMessage($message);
     printMessage('send', $message);
+    return;
 }
 
 // message request processing
@@ -63,12 +66,14 @@ if(($_POST['type'] ?? false) == 'getMessage'){
     include $app . 'chat.php';
     $messages = getMessages($_POST['id'] + 1);
     printMessage('getMessage', $messages);
+    return;
 }
 
 // returns username by session
 if(($_POST['type'] ?? false) == 'getUserName'){
     include $app . 'chat.php';
     printMessage('getUserName', ['username' => getUsername()]);
+    return;
 }
 // query result output
 function printMessage($type, $message)

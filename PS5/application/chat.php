@@ -1,6 +1,8 @@
 <?php
+date_default_timezone_set('Europe/Kiev');
 require_once 'Messages.php';
 require_once 'Accounts.php';
+
 
 // returns a message starting with id
 function getMessages($startId = 0){

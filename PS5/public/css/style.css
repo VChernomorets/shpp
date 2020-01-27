@@ -1,6 +1,7 @@
 body {
     background-color: #b9c783;
     font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 }
 
 header {
@@ -36,7 +37,8 @@ header {
 }
 
 .login__form {
-    padding: 10px;
+    background-color: #b9c783;
+    width: 300px;
 }
 
 .login__input, .send__message {
@@ -46,6 +48,7 @@ header {
     margin: 5px 0;
     padding: 10px;
     color: #635960;
+    font-weight: 700;
 }
 
 .login__label {
@@ -80,6 +83,7 @@ input:-webkit-autofill {
     color: #fffecd;
     font-size: 20px;
     cursor: pointer;
+    font-weight: 700;
 }
 
 .login__submit:hover {
@@ -88,13 +92,12 @@ input:-webkit-autofill {
 
 .login__shadow {
     height: 150px;
+    width: 300px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(185, 199, 131, 0) 100%);
-    width: 100%;
-    -moz-transform: translate(27px, 0px) skew(20deg, 0deg);
-    -webkit-transform: translate(27px, 0px) skew(20deg, 0deg);
-    -o-transform: translate(3627, 0px) skew(20deg, 0deg);
-    -ms-transform: translate(27px, 0px) skew(20deg, 0deg);
-    transform: translate(27px, 0px) skew(20deg, 0deg);
+    transform-origin: top left;
+    transform: rotate(-15deg);
+    position: absolute;
+    z-index: -999;
 }
 
 .chat {
@@ -108,6 +111,7 @@ input:-webkit-autofill {
     height: 40vh;
     background-color: #fffecd;
     overflow: auto;
+    padding: 15px 0;
 }
 
 .send__message {
@@ -122,6 +126,7 @@ input:-webkit-autofill {
     cursor: pointer;
     margin-left: 30px;
     padding: 10px 30px;
+    font-weight: 700;
 }
 
 .send{
@@ -132,6 +137,11 @@ input:-webkit-autofill {
     margin: 0 10px;
     color: #635960;
     display: block;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.message__time{
+    font-weight: 400;
 }
 
 .message__time::before{
@@ -140,6 +150,10 @@ input:-webkit-autofill {
 
 .message__time::after{
     content: "]";
+}
+
+.message__text{
+    font-weight: 400;
 }
 
 .error {

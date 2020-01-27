@@ -44,6 +44,7 @@ $(document).ready(function () {
             } else {
                 displayLogin();
             }
+            return;
         }
         if (isset(answer['login'])) {
             let login = answer['login'];
@@ -53,6 +54,7 @@ $(document).ready(function () {
             if (login === 'successful') {
                 displayChat();
             }
+            return;
         }
         if (isset(answer['send'])) {
             let send = answer['send'];
@@ -64,6 +66,7 @@ $(document).ready(function () {
             } else {
                 $('#emptyMessage').css('display', 'none');
             }
+            return;
         }
         if (isset(answer['getMessage'])) {
             let message = answer['getMessage'];
@@ -74,13 +77,15 @@ $(document).ready(function () {
                 }
             } else {
                 let $chat = $('.chat__messagesBlock');
-                scrollFag = $chat.prop('scrollHeight') === Math.round($chat.height() + $chat.scrollTop());
+                scrollFag = $chat.prop('scrollHeight') === Math.round($chat.outerHeight() + $chat.scrollTop());
                 displayMessages(message);
                 scrollChat($chat);
             }
+            return;
         }
         if(isset(answer['getUserName'])){
             displayWelcome(answer['getUserName']['username']);
+            return;
         }
     }
 
@@ -98,7 +103,7 @@ $(document).ready(function () {
         messages.forEach(function (item) {
             lastMessageId = item['id'];
             const date = $('<span>').addClass('message__time').text(item['date']);
-            const username = $('<b>').addClass('message__name').text(item['username'] + ': ');
+            const username = $('<b>').addClass('message__name').text(' ' + item['username'] + ': ');
             const message = $('<span>').addClass('message__text').text(replaceSmile(item['messages']));
             const wholeMessage = $('<p>').addClass('message').append(date, username, message);
             $('.chat__messagesBlock').append(wholeMessage);
@@ -129,7 +134,7 @@ $(document).ready(function () {
 
     // handles all validation errors that come from the server.
     function displayErrors(answer) {
-        let errors = ['wrongPasswordError', 'usernameError', 'passwordError', 'emptyMessage'];
+        let errors = ['wrongPasswordError', 'usernameError', 'passwordError'];
         errors.forEach((element) => {
             $('#' + element).css('display', 'none');
         });
