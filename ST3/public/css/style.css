@@ -27,4 +27,5 @@
 .message__text{
     margin: 0;
     padding: 0;
+    cursor: text;
 }

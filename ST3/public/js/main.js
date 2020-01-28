@@ -1,33 +1,92 @@
-let draggableFlag = false;
+$(document).ready(() => {
+    let messageId = 0;
 
-const background = document.getElementById('main');
-background.addEventListener('dblclick', (e)=> {
-    const x = e.clientX;
-    const y = e.clientY;
-    const message = document.createElement('div');
-    message.className = 'message';
-    const input = document.createElement('input');
-    input.autofocus = true;
-    message.appendChild(input);
-    background.appendChild(message);
-    message.style.top = (+y - (message.offsetHeight + 12)) + 'px';
-    message.style.left = (+x - (message.offsetWidth - 25)) + 'px';
-    message.addEventListener('mousedown', draggable);
-    message.addEventListener('mouseup', () => draggableFlag = false);
+   $('#main').on('dblclick', function(e) {
+       if(!$(this).is(e.target)){
+           return;
+       }
+       const MARGIN_AFTER = 27;
+       const SIZE_AFTER = 8;
+       const $message = $('<div></div>').addClass('message').attr('id', 'm' + messageId);
+       messageId++;
+       const $input = $('<input type="text">').addClass('message__input');
+       $message.append($input);
+       $(this).append($message);
+       let positionY = +e.clientY - (+$message.outerHeight() + +SIZE_AFTER) + 'px';
+       let positionX = +e.clientX - (+$message.outerWidth() - +MARGIN_AFTER) + 'px';
+       $message.css('left', positionX).css('top', positionY);
+       $message.draggable({containment: 'parent'});
+       $input.on('keydown', enterMessage);
+       $input.on('blur', function () {addMessage($(this))});
+       $input.focus();
+    })
 });
 
-function draggable(e) {
-    draggableFlag = true;
+function enterMessage(e) {
+    if (e.code === 'Enter'){
+        addMessage($(this));
+    }
+    if(e.code === 'Escape' ){
+        deleteMessage($(this).parent());
+    }
+}
 
-    const elementY = e.clientY - this.offsetTop;
-    const elementX = e.clientX - this.offsetLeft;
-    let interval = setInterval(() => {
-        if(!draggableFlag){
-            clearInterval(interval);
+function editMessage(e) {
+    const $input = $('<input type="text">').addClass('message__input').val($(this).text());
+    $(this).parent().append($input);
+    $input.on('keydown', enterMessage);
+    $input.on('blur', function () {addMessage($(this))});
+    $input.focus();
+    $(this).remove();
+}
+
+function addMessage(element) {
+    saveMessage(element);
+    const textMessage = element.val();
+    if(textMessage === ''){
+        deleteMessage(element.parent());
+    }
+    const $text = $('<p></p>').addClass('message__text').text(textMessage);
+    element.parent().append($text);
+    $text.on('dblclick', editMessage);
+    element.remove();
+}
+
+function deleteMessage(element) {
+    const id = element.attr('id');
+    query('type=deleteMessage&id=' + id);
+    element.remove();
+}
+
+function saveMessage(element) {
+    const parent = element.parent();
+    const message  = {
+        text: element.val(),
+        id: parent.attr('id'),
+        y: parent.css('top'),
+        x: parent.css('left'),
+        toString: function () {
+            return 'text=' + this.text + '&id=' + this.id + '&y=' + this.y + '&x=' + this.x;
         }
-        console.log((+e.pageY - +elementY));
-        this.style.top = (+e.clientY - +elementY) + 'px';
-        //console.log(e.clientY + ' - ' + e.offsetY + ' = ' + (+e.clientY - +e.offsetY));
+    };
+    query('type=saveMessage&' + message.toString());
+}
 
-    }, 100);
+function query(data) {
+    $.ajax({
+        type: 'post',
+        url: 'handler.php',
+        data: data,
+        dataType: 'json',
+        success: function (answer) {
+            handler(answer);
+        },
+        error: function (answer) {
+            console.log(answer['responseText']);
+        }
+    });
+}
+
+function handler(answer) {
+    console.log(answer)
 }
