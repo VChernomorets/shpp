@@ -9,7 +9,7 @@ $(document).ready(() => {
        }
        const MARGIN_AFTER = 27;
        const SIZE_AFTER = 8;
-       const $message = $('<div></div>').addClass('message').attr('id', 'm' + (+messageId + 1));
+       const $message = $('<div></div>').addClass('message').attr('id', 'm' + messageId);
        const $input = $('<input type="text">').addClass('message__input');
        $message.append($input);
        $(this).append($message);
@@ -45,7 +45,7 @@ function createMessage(id, x,y, text) {
     $message.css('left', x + 'px').css('top', y + 'px');
     $text.on('dblclick', editMessage);
     addDraggable($message);
-    messageId = id;
+    messageId = +id + 1;
 }
 
 // We process the end of the message in the field
