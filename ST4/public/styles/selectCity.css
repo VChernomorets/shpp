@@ -1,0 +1,21 @@
+.city{
+    display: none;
+}
+
+.city__select{
+    border: none;
+    background: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.city__option{
+    color: #394165;
+}
