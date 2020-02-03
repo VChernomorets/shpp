@@ -31,6 +31,7 @@ function generateQuery(e) {
 
 // Making a server request
 function query(data) {
+    $('#preloader').show();
     $.ajax({
         type: 'post',
         url: 'handler.php',
@@ -59,7 +60,6 @@ function handler(answer) {
         weather.forEach((element) => {
             createWeatherLine(element);
         });
-        return;
     }
 
     // Processing the list of cities
@@ -75,6 +75,8 @@ function handler(answer) {
         $select.on('change', changeSelect);
         query('type=getWeather&typeDate=' + $selected.attr('id')+ '&cityId=' + list[0]['id'] + '&city=' + list[0]['name']);
     }
+
+    $('#preloader').hide();
 
 }
 

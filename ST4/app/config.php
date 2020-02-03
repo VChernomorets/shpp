@@ -4,9 +4,9 @@ return [
     'dataFile' => $dataPath . 'today.json',
     'db' => [
         'host' => 'localhost',
-        'dbname' => 'weather',
+        'dbname' => 'ST4',
         'user' => 'root',
         'pass' => ''
     ],
-    'apiKey' => ''
+    'apiKey' => '8QplQsDAHuiWw2jaGAdWokVOA5XsQWhU'
 ];
