@@ -63,7 +63,7 @@ class Weather
             return 'error city id';
         }
         $db = new DB();
-        $data = $db->select('SELECT `temperature`, `timestamp` FROM `forecast` WHERE `city_id`=? ', [$cityId]);
+        $data = $db->select('SELECT `temperature`, `timestamp`, `clouds`, `rain_possibility` FROM `forecast` WHERE `city_id`=? ', [$cityId]);
         if(count($data) === 0){
             return 'city not found';
         }
@@ -73,7 +73,8 @@ class Weather
             array_push($result, [
                 'date' => $date->format('j/m'),
                 'time' => $date->format('H:i'),
-                'temp' => $element['temperature']
+                'temp' => $element['temperature'],
+                'icon' => $this->getIconBySql($element['clouds'], $element['rain_possibility'])
             ]);
         }
         return $result;
@@ -96,12 +97,14 @@ class Weather
             array_push($result, [
                 'date' => $date->format('j/m'),
                 'time' => $date->format('H:i'),
-                'temp' => round(($element->Temperature->Value - 32) / 1.8)
+                'temp' => round(($element->Temperature->Value - 32) / 1.8),
+                'icon' => $this->getIconByApi($element->CloudCover, $element->Rain->Value)
             ]);
         }
         return $result;
     }
 
+    // Return the weather
     private function getIconByJson($description){
         switch ($description){
             case 'moderate rain' :
@@ -117,12 +120,29 @@ class Weather
         }
     }
 
-    private function getIconName($cloud, $rain){
-        echo '| cloud: ' . $cloud . ' rain: ' .$rain;
-        if($rain > 80){
+    // Based on the weather data, we return its state
+    private function getIconBySql($cloud, $rain){
+        if($rain > 0.8){
             return 'flash';
         }
-        if($rain > 60){
+        if($rain > 0.6){
+            return 'rain';
+        }
+        if($cloud > 70){
+            return 'cloud';
+        }
+        if($cloud > 40){
+            return 'partlyCloudy';
+        }
+        return 'sun';
+    }
+
+    // Based on the weather data, we return its state
+    private function getIconByApi($cloud, $rain){
+        if($rain > 1){
+            return 'flash';
+        }
+        if($rain > 0){
             return 'rain';
         }
         if($cloud > 70){
