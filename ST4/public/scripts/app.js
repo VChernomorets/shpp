@@ -52,14 +52,16 @@ function handler(answer) {
 
     // Processing weather
     if (isset(answer['weather'])) {
+        console.log(answer['weather']);
         const weather = answer['weather'];
-        console.log(weather);
         $('#weatherNow').text(weather[0]['temp']);
         $('#date').text(weather[0]['date']);
         $('#forecast').html('');
         weather.forEach((element) => {
             createWeatherLine(element);
         });
+        $('#preloader').slideUp('slow');
+        return;
     }
 
     // Processing the list of cities
@@ -75,8 +77,6 @@ function handler(answer) {
         $select.on('change', changeSelect);
         query('type=getWeather&typeDate=' + $selected.attr('id')+ '&cityId=' + list[0]['id'] + '&city=' + list[0]['name']);
     }
-
-    $('#preloader').hide();
 
 }
 

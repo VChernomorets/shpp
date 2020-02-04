@@ -8,5 +8,5 @@ return [
         'user' => 'root',
         'pass' => ''
     ],
-    'apiKey' => '8QplQsDAHuiWw2jaGAdWokVOA5XsQWhU'
+    'apiKey' => '7uvJko8zhblUM4Ui9XyNAclNHv4pBoHS'
 ];

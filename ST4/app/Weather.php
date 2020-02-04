@@ -36,17 +36,19 @@ class Weather
             return false;
         }
         $data = file_get_contents($this->config['dataFile']);
-        $data = json_decode($data);
-        $today = new DateTime('2017-02-16');
+        $data = json_decode($data, true);
+
+        $today = new DateTime('2017-02-17');
         $kelvin = 273.15;
         $result = [];
-        foreach ($data->list as $element) {
-            $date = new DateTime($element->dt_txt);
+        foreach ($data['list'] as $element) {
+            $date = new DateTime($element['dt_txt']);
             if ($today->format('n-j') === $date->format('n-j')) {
                 array_push($result, [
                     'date' => $date->format('j/m'),
                     'time' => $date->format('H:i'),
-                    'temp' => round($element->main->temp - $kelvin)
+                    'temp' => round($element['main']['temp'] - $kelvin),
+                    'icon' => $this->getIconByJson($element['weather'][0]['description'])
                 ]);
             }
         }
@@ -88,7 +90,6 @@ class Weather
         $cityKey = $data[0]->Key;
         $link = 'http://dataservice.accuweather.com/forecasts/v1/hourly/12hour/' . $cityKey . '?language=en-us&details=true&apikey=' . $this->config['apiKey'];
         $data = json_decode(file_get_contents($link));
-        //print_r($data);
         $result = [];
         foreach($data as $element){
             $date = new DateTime($element->DateTime);
@@ -99,5 +100,37 @@ class Weather
             ]);
         }
         return $result;
+    }
+
+    private function getIconByJson($description){
+        switch ($description){
+            case 'moderate rain' :
+                return 'flash';
+            case 'light rain' :
+                return 'rain';
+            case 'few clouds' :
+                return 'partlyCloudy';
+            case 'broken clouds' :
+                return 'cloud';
+            default :
+                return 'sun';
+        }
+    }
+
+    private function getIconName($cloud, $rain){
+        echo '| cloud: ' . $cloud . ' rain: ' .$rain;
+        if($rain > 80){
+            return 'flash';
+        }
+        if($rain > 60){
+            return 'rain';
+        }
+        if($cloud > 70){
+            return 'cloud';
+        }
+        if($cloud > 40){
+            return 'partlyCloudy';
+        }
+        return 'sun';
     }
 }
